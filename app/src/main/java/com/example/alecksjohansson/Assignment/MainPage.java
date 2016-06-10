@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,7 +26,8 @@ import it.gmariotti.cardslib.library.view.CardViewNative;
 public class MainPage extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     DatePickerDialog dpd;
 
-    String date;
+    String dateStart;
+    String dateEnd;
     TextView mtvFlyOut;
     TextView mTvFlyBack;
 
@@ -37,12 +39,15 @@ public class MainPage extends AppCompatActivity implements DatePickerDialog.OnDa
         mTvFlyBack = (TextView) findViewById(R.id.tvFlyBack);
 
 
-    }private void updateFly(String date)
+    }private void updateFly(String dateStart,String dateEnd)
     {
-        mTvFlyBack.setText(date);
+        mTvFlyBack.setText(dateEnd);
+        mtvFlyOut.setText(dateStart);
     }
 
-    private void setDate()
+    public void setDate(View view)
+
+
     {
         Calendar now = Calendar.getInstance();
         dpd = DatePickerDialog.newInstance(
@@ -58,10 +63,18 @@ public class MainPage extends AppCompatActivity implements DatePickerDialog.OnDa
     }
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth, int yearEnd, int monthOfYearEnd, int dayOfMonthEnd) {
-         date = dayOfMonth+"/"+(monthOfYear+1)+"/"+year;
-        if(date != null) {
-            updateFly(date);
+         dateStart = dayOfMonth+"/"+(monthOfYear+1)+"/"+year;
+            dateEnd = dayOfMonthEnd+"/"+(monthOfYearEnd+1)+"/"+yearEnd;
+
+        if(dateStart == null && dateEnd == null) {
+
+            Toast.makeText(MainPage.this,"Please choose Dates",Toast.LENGTH_SHORT).show();
         }
+        else{
+            updateFly(dateStart,dateEnd);
+        }
+
+
 
     }
 

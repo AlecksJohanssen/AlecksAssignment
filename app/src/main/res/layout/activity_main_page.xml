@@ -7,7 +7,12 @@
     android:layout_height="match_parent"
 
     >
-
+<ImageView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:src="@drawable/background3"
+    android:layout_gravity="center"
+    android:scaleType = "centerCrop"/>
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -17,16 +22,16 @@
         android:weightSum="1">
         <com.arlib.floatingsearchview.FloatingSearchView
             android:id="@+id/floating_search_view"
-            android:layout_width="248dp"
+            android:layout_width="245dp"
             android:layout_height="67dp"
             android:layout_marginTop="150dp"
-            android:layout_marginLeft="65dp"
+            android:layout_marginLeft="63dp"
             app:floatingSearch_searchHint="Search..."
             app:floatingSearch_suggestionsListAnimDuration="250"
             app:floatingSearch_showSearchKey="false"
             app:floatingSearch_leftActionMode="showSearch"
             app:floatingSearch_menu="@menu/menu_main"
-            android:layout_weight="0.02" />
+            android:layout_weight="0.15" />
 
 
 
@@ -44,7 +49,12 @@
             android:layout_marginTop="250dp"
             android:layout_marginLeft="65dp"
             android:background="@drawable/shape"
-            android:layout_weight="0.02">
+            android:layout_weight="0.02"
+            android:drawableLeft="@drawable/icon_plane2"
+            android:drawablePadding="8dp"
+            android:hint="Your Fly Out dates"
+            android:textColor="#00ccff"
+            android:textColorLink="#8DE67F">
         </TextView>
         <TextView
             android:layout_width="250dp"
@@ -54,7 +64,12 @@
             android:layout_marginTop="0.5dp"
             android:layout_marginLeft="65dp"
             android:background="@drawable/shape_below"
-            android:layout_weight="0.02">
+            android:layout_weight="0.02"
+            android:drawableLeft="@drawable/icon_plane"
+            android:drawablePadding="8dp"
+            android:hint="Your Fly Back dates"
+            android:textColor="#00ccff"
+            android:textColorLink="#8DE67F">
         </TextView>
     </LinearLayout>
 
