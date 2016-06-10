@@ -11,5 +11,7 @@
     <dimen name="native_list_card_margin_right">0dp</dimen>
     <dimen name="native_list_card_margin_bottom">4dp</dimen>
     <dimen name="native_list_card_margin_top">4dp</dimen>
-    <color name="card_text_color_header">#ffff</color>
+    <color name="card_text_color_header">#000</color>
+    <color name="card_background">#FFF</color>
+    <dimen name="card_background_default_radius">2dip</dimen>
 </resources>
