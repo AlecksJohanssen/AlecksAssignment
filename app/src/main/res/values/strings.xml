@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Assignment</string>
+    <string name="app_intro">Intro</string>
+    <string name="skip">skip</string>
+    <string name="demo_header_basetitle">Hello Alecks</string>
+    <string name="demo_header_exampletitle1">Test1</string>
+</resources>

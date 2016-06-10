@@ -1,0 +1,15 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <dimen name="native_list_card_margin_left">0dp</dimen>
+    <dimen name="native_list_card_margin_right">0dp</dimen>
+    <dimen name="native_list_card_margin_bottom">4dp</dimen>
+    <dimen name="native_list_card_margin_top">4dp</dimen>
+    <color name="card_text_color_header">#ffff</color>
+</resources>
