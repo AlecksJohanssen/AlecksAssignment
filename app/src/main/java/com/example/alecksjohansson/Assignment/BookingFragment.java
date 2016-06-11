@@ -5,19 +5,31 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.arlib.floatingsearchview.FloatingSearchView;
+import com.arlib.floatingsearchview.suggestions.SearchSuggestionsAdapter;
+import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion;
 import com.borax12.materialdaterangepicker.date.DatePickerDialog;
+import com.example.alecksjohansson.Assignment.data.DataSuggestion;
+import com.example.alecksjohansson.Assignment.data.DataWrapper;
 
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * Created by alecksjohansson on 6/11/16.
@@ -26,15 +38,22 @@ public class BookingFragment extends Fragment implements DatePickerDialog.OnDate
     private TextView mtvFlyOut;
     private TextView mTvFlyBack;
     private DatePickerDialog dpd;
-    private FragmentActivity myContext;
     private String dateStart;
     private String dateEnd;
+    private RecyclerView mSearchResultsList;
+    private SearchResultsListAdapter mSearchResultsAdapter;
+    private boolean mIsDarkSearchTheme = false;
 
+    public static final long FIND_SUGGESTION_SIMULATED_DELAY = 250;
+
+    private FloatingSearchView mSearchView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.booking_fragment,null);
         mtvFlyOut = (TextView) v.findViewById(R.id.tvFlyOut);
         mTvFlyBack = (TextView) v.findViewById(R.id.tvFlyBack);
+        mSearchView = (FloatingSearchView) v.findViewById(R.id.floating_search_view);
+        mSearchResultsList = (RecyclerView) v.findViewById(R.id.search_results_list);
         return v;
     }
 
@@ -42,6 +61,7 @@ public class BookingFragment extends Fragment implements DatePickerDialog.OnDate
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setDate();
+        setUpFloatingSearch();
     }
 
     private void updateFly(String dateStart, String dateEnd)
@@ -77,11 +97,127 @@ public class BookingFragment extends Fragment implements DatePickerDialog.OnDate
 
             Toast.makeText(getContext(),"Please choose Dates",Toast.LENGTH_SHORT).show();
         }
-        else{
-            updateFly(dateStart,dateEnd);
+        else {
+            updateFly(dateStart, dateEnd);
         }
-
-
-
     }
+    private void setUpFloatingSearch()
+    {mSearchView.setOnQueryChangeListener(new FloatingSearchView.OnQueryChangeListener() {
+        @Override
+        public void onSearchTextChanged(String oldQuery, final String newQuery) {
+            if (!oldQuery.equals("") && newQuery.equals("")) {
+                mSearchView.clearSuggestions();
+            } else {
+
+                //this shows the top left circular progress
+                //you can call it where ever you want, but
+                //it makes sense to do it when loading something in
+                //the background.
+                mSearchView.showProgress();
+
+                //simulates a query call to a data source
+                //with a new query.
+                DatabaseHelper.findSuggestions(getActivity(), newQuery, 5, FIND_SUGGESTION_SIMULATED_DELAY, new DatabaseHelper.OnFindSuggestionsListener() {
+
+                    @Override
+                    public void onResults(List<DataSuggestion> results) {
+
+                        //this will swap the data and
+                        //render the collapse/expand animations as necessary
+                        mSearchView.swapSuggestions(results);
+
+                        //let the users know that the background
+                        //process has completed
+                        mSearchView.hideProgress();
+                    }
+                });
+            }
+
+            Log.d("BookingFragment", "onSearchTextChanged()");
+        }
+    });
+
+        mSearchView.setOnSearchListener(new FloatingSearchView.OnSearchListener() {
+            @Override
+            public void onSuggestionClicked(SearchSuggestion searchSuggestion) {
+
+                DataSuggestion colorSuggestion = (DataSuggestion) searchSuggestion;
+                DatabaseHelper.findColors(getActivity(), colorSuggestion.getBody(),
+                        new DatabaseHelper.OnFindColorsListener() {
+
+                            @Override
+                            public void onResults(List<DataWrapper> results) {
+                                mSearchResultsAdapter.swapData(results);
+                            }
+
+                        });
+                Log.d("tAG", "onSuggestionClicked()");
+            }
+
+            @Override
+            public void onSearchAction(String query) {
+
+                DatabaseHelper.findColors(getActivity(), query,
+                        new DatabaseHelper.OnFindColorsListener() {
+
+                            @Override
+                            public void onResults(List<DataWrapper> results) {
+                                mSearchResultsAdapter.swapData(results);
+                            }
+
+                        });
+                Log.d("TAG", "onSearchAction()");
+            }
+        });
+
+        mSearchView.setOnFocusChangeListener(new FloatingSearchView.OnFocusChangeListener() {
+            @Override
+            public void onFocus() {
+                mSearchView.clearQuery();
+
+                //show suggestions when search bar gains focus (typically history suggestions)
+                mSearchView.swapSuggestions(DatabaseHelper.getHistory(getActivity(), 3));
+
+                Log.d("TAG", "onFocus()");
+            }
+
+            @Override
+            public void onFocusCleared() {
+
+                Log.d("TAG", "onFocusCleared()");
+            }
+        });
+
+
+        //handle menu clicks the same way as you would
+        //in a regular activity
+        mSearchView.setOnMenuItemClickListener(new FloatingSearchView.OnMenuItemClickListener() {
+            @Override
+            public void onActionMenuItemSelected(MenuItem item) {
+
+                if (item.getItemId() == R.id.action_change_colors) {
+
+                    mIsDarkSearchTheme = true;
+
+                    //demonstrate setting colors for items
+                    mSearchView.setBackgroundColor(Color.parseColor("#787878"));
+                    mSearchView.setViewTextColor(Color.parseColor("#e9e9e9"));
+                    mSearchView.setHintTextColor(Color.parseColor("#e9e9e9"));
+                    mSearchView.setActionMenuOverflowColor(Color.parseColor("#e9e9e9"));
+                    mSearchView.setMenuItemIconColor(Color.parseColor("#e9e9e9"));
+                    mSearchView.setLeftActionIconColor(Color.parseColor("#e9e9e9"));
+                    mSearchView.setClearBtnColor(Color.parseColor("#e9e9e9"));
+                    mSearchView.setDividerColor(Color.parseColor("#BEBEBE"));
+                    mSearchView.setLeftActionIconColor(Color.parseColor("#e9e9e9"));
+                } else {
+
+                    //just print action
+                    Toast.makeText(getContext(), item.getTitle(),
+                            Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+    }
+
 }
