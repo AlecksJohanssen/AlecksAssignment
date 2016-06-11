@@ -34,7 +34,6 @@ import it.gmariotti.cardslib.library.internal.base.BaseCard;
 import it.gmariotti.cardslib.library.view.CardViewNative;
 
 public class MainPage extends ActionBarActivity  {
-    private TabLayout mTabLayout;
     private MaterialViewPager mViewPager;
 
     @Override
@@ -42,6 +41,7 @@ public class MainPage extends ActionBarActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
         mViewPager = (MaterialViewPager) findViewById(R.id.materialViewPager);
+        mViewPager.getResources().getColor(R.color.drawerArrowColor);
         mViewPager.getViewPager().setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
@@ -54,7 +54,6 @@ public class MainPage extends ActionBarActivity  {
                         return BookingFragment.newInstance();
                 }
             }
-
             @Override
             public int getCount() {
                 return 2;
@@ -64,9 +63,9 @@ public class MainPage extends ActionBarActivity  {
             public CharSequence getPageTitle(int position) {
                 switch (position % 2) {
                     case 0:
-                        return "Selection";
+                        return "Planning";
                     case 1:
-                        return "Actualités";
+                        return "Explore ";
                 }
                 return "";
             }

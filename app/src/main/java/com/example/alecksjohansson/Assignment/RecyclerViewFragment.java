@@ -28,6 +28,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.github.florent37.materialviewpager.adapter.RecyclerViewMaterialAdapter;
 import com.github.florent37.materialviewpager.header.MaterialViewPagerHeaderDecorator;
 
 
@@ -40,7 +41,7 @@ import java.util.List;
 public class RecyclerViewFragment extends Fragment {
 
     static final boolean GRID_LAYOUT = false;
-    private static final int ITEM_COUNT = 100;
+    private static final int ITEM_COUNT = 4;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private List<Object> mContentItems = new ArrayList<>();

@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-
     <com.github.florent37.materialviewpager.MaterialViewPager
         android:id="@+id/materialViewPager"
         android:layout_width="match_parent"
@@ -26,7 +25,5 @@
         app:viewpager_animatedHeaderImage="true"
         app:viewpager_disableToolbar="false"
         app:viewpager_pagerTitleStrip="@layout/tabs_layout"
-
-
         />
 </RelativeLayout>

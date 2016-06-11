@@ -2,6 +2,9 @@ package com.example.alecksjohansson.Assignment;
 
 import android.annotation.SuppressLint;
 
+import android.app.Activity;
+import android.app.FragmentManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -31,7 +34,7 @@ public class BookingFragment extends Fragment implements DatePickerDialog.OnDate
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.booking_fragment,null);
         mtvFlyOut = (TextView) v.findViewById(R.id.tvFlyOut);
-         mTvFlyBack = (TextView) v.findViewById(R.id.tvFlyBack);
+        mTvFlyBack = (TextView) v.findViewById(R.id.tvFlyBack);
         return v;
     }
 
@@ -58,8 +61,9 @@ public class BookingFragment extends Fragment implements DatePickerDialog.OnDate
                 now.get(Calendar.MONTH),
                 now.get(Calendar.DAY_OF_MONTH)
         );
-        dpd.setThemeDark(true);
-        //dpd.show(fragManager, "Datepickerdialog");
+        dpd.setThemeDark(false);
+        dpd.setAccentColor(R.color.purple);
+        dpd.show(getActivity().getFragmentManager(), "Datepickerdialog");
         dpd.setStartTitle("From");
         dpd.setEndTitle("To");
     }
