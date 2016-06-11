@@ -1,5 +1,6 @@
 package com.example.alecksjohansson.Assignment;
 
+import android.graphics.drawable.Drawable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -48,12 +49,15 @@ public class MainPage extends ActionBarActivity implements DatePickerDialog.OnDa
         //mtvFlyOut = (TextView) findViewById(R.id.tvFlyOut);
        // mTvFlyBack = (TextView) findViewById(R.id.tvFlyBack);
         mViewPager = (MaterialViewPager) findViewById(R.id.materialViewPager);
+        Drawable mDrawable = getDrawable(R.drawable.background3);
+
+        mViewPager.setBackground(mDrawable);
         mViewPager.getViewPager().setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager()) {
 
 
             @Override
             public Fragment getItem(int position) {
-                switch (position % 4) {
+                switch (position % 2) {
                     //case 0:
                     //    return RecyclerViewFragment.newInstance();
                     //case 1:
@@ -67,20 +71,16 @@ public class MainPage extends ActionBarActivity implements DatePickerDialog.OnDa
 
             @Override
             public int getCount() {
-                return 4;
+                return 2;
             }
 
             @Override
             public CharSequence getPageTitle(int position) {
-                switch (position % 4) {
+                switch (position % 2) {
                     case 0:
                         return "Selection";
                     case 1:
                         return "Actualités";
-                    case 2:
-                        return "Professionnel";
-                    case 3:
-                        return "Divertissement";
                 }
                 return "";
             }
