@@ -33,12 +33,7 @@ import it.gmariotti.cardslib.library.internal.CardThumbnail;
 import it.gmariotti.cardslib.library.internal.base.BaseCard;
 import it.gmariotti.cardslib.library.view.CardViewNative;
 
-public class MainPage extends ActionBarActivity implements DatePickerDialog.OnDateSetListener {
-    DatePickerDialog dpd;
-    String dateStart;
-    String dateEnd;
-    TextView mtvFlyOut;
-    TextView mTvFlyBack;
+public class MainPage extends ActionBarActivity  {
     private TabLayout mTabLayout;
     private MaterialViewPager mViewPager;
 
@@ -46,26 +41,17 @@ public class MainPage extends ActionBarActivity implements DatePickerDialog.OnDa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
-        //mtvFlyOut = (TextView) findViewById(R.id.tvFlyOut);
-       // mTvFlyBack = (TextView) findViewById(R.id.tvFlyBack);
         mViewPager = (MaterialViewPager) findViewById(R.id.materialViewPager);
-        Drawable mDrawable = getDrawable(R.drawable.background3);
-
-        mViewPager.setBackground(mDrawable);
         mViewPager.getViewPager().setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager()) {
-
-
             @Override
             public Fragment getItem(int position) {
                 switch (position % 2) {
-                    //case 0:
-                    //    return RecyclerViewFragment.newInstance();
-                    //case 1:
-                    //    return RecyclerViewFragment.newInstance();
-                    //case 2:
-                    //    return WebViewFragment.newInstance();
-                    default:
+                    case 0:
+                        return BookingFragment.newInstance();
+                    case 1:
                         return RecyclerViewFragment.newInstance();
+                    default:
+                        return BookingFragment.newInstance();
                 }
             }
 
@@ -109,44 +95,4 @@ public class MainPage extends ActionBarActivity implements DatePickerDialog.OnDa
         mViewPager.getViewPager().setOffscreenPageLimit(mViewPager.getViewPager().getAdapter().getCount());
         mViewPager.getPagerTitleStrip().setViewPager(mViewPager.getViewPager());
     }
-
-    private void updateFly(String dateStart,String dateEnd)
-    {
-       // mTvFlyBack.setText(dateEnd);
-      //  mtvFlyOut.setText(dateStart);
-    }
-
-    public void setDate(View view)
-
-
-    {
-        Calendar now = Calendar.getInstance();
-        dpd = DatePickerDialog.newInstance(
-                MainPage.this,
-                now.get(Calendar.YEAR),
-                now.get(Calendar.MONTH),
-                now.get(Calendar.DAY_OF_MONTH)
-        );
-        dpd.setThemeDark(true);
-        dpd.show(getFragmentManager(), "Datepickerdialog");
-        dpd.setStartTitle("From");
-        dpd.setEndTitle("To");
-    }
-    @Override
-    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth, int yearEnd, int monthOfYearEnd, int dayOfMonthEnd) {
-         dateStart = dayOfMonth+"/"+(monthOfYear+1)+"/"+year;
-            dateEnd = dayOfMonthEnd+"/"+(monthOfYearEnd+1)+"/"+yearEnd;
-
-        if(dateStart == null && dateEnd == null) {
-
-            Toast.makeText(MainPage.this,"Please choose Dates",Toast.LENGTH_SHORT).show();
-        }
-        else{
-            updateFly(dateStart,dateEnd);
-        }
-
-
-
-    }
-
 }
