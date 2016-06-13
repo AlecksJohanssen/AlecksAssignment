@@ -29,6 +29,7 @@ import com.borax12.materialdaterangepicker.date.DatePickerDialog;
 import com.example.alecksjohansson.Assignment.data.DataSuggestion;
 import com.example.alecksjohansson.Assignment.data.DataWrapper;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
@@ -63,12 +64,35 @@ public class BookingFragment extends Fragment implements DatePickerDialog.OnDate
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setUpFloatingSearch();
+        checkDate();
         setDateOnClickListener();
+
+    }
+    private void checkDate()
+    {
+        if(mTvFlyBack != null || mtvFlyOut != null)
+        {
+            mTvFlyBack.setText(date());
+            mtvFlyOut.setText(date());
+            Log.d("FLY","FLY"+date());
+
+        }else {
+            Log.d("NOTNULL","NOTNULl");
+        }
     }
     private void updateFly(String dateStart, String dateEnd)
     {
         mTvFlyBack.setText(dateEnd);
         mtvFlyOut.setText(dateStart);
+    }
+    private String date()
+    {
+        String Datetime;
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat dateformat = new SimpleDateFormat("dd-MMM-yyyy ");
+        Datetime = dateformat.format(c.getTime());
+        System.out.println(Datetime);
+        return Datetime;
     }
     public static BookingFragment newInstance() {
         return new BookingFragment();
