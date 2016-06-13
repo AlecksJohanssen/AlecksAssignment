@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -28,6 +29,15 @@ import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion;
 import com.borax12.materialdaterangepicker.date.DatePickerDialog;
 import com.example.alecksjohansson.Assignment.data.DataSuggestion;
 import com.example.alecksjohansson.Assignment.data.DataWrapper;
+import com.mikepenz.materialdrawer.AccountHeader;
+import com.mikepenz.materialdrawer.AccountHeaderBuilder;
+import com.mikepenz.materialdrawer.Drawer;
+import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.model.DividerDrawerItem;
+import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
+import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
+import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -42,6 +52,9 @@ public class BookingFragment extends Fragment implements DatePickerDialog.OnDate
     private DatePickerDialog dpd;
     private String dateStart;
     private String dateEnd;
+    private Drawer mResult;
+    private PrimaryDrawerItem mItem1;
+    private PrimaryDrawerItem mItem2;
     private RecyclerView mSearchResultsList;
     private SearchResultsListAdapter mSearchResultsAdapter;
     private boolean mIsDarkSearchTheme = false;
@@ -66,6 +79,37 @@ public class BookingFragment extends Fragment implements DatePickerDialog.OnDate
         setUpFloatingSearch();
         checkDate();
         setDateOnClickListener();
+        //setupDrawer();
+
+    }
+    private void setupDrawer() {
+        AccountHeader headerResult = new AccountHeaderBuilder()
+                .withActivity(getActivity())
+                .withHeaderBackground(R.drawable.header)
+                .addProfiles(
+                        new ProfileDrawerItem().withName("Alecks Johanssen").withEmail("mikeytore@gmail.com")
+                )
+                .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
+                    @Override
+                    public boolean onProfileChanged(View view, IProfile profile, boolean currentProfile) {
+                        return false;
+                    }
+                })
+                .build();
+        mItem1 = new PrimaryDrawerItem().withName("Search");
+        mItem2 =  new PrimaryDrawerItem().withName("Favorites");
+        mResult = new DrawerBuilder()
+                .withActivity(getActivity())
+                .withAccountHeader(headerResult)
+                .addDrawerItems(
+                        mItem1,
+                        new DividerDrawerItem(),
+                        mItem2,
+                        new DividerDrawerItem(),
+                        new SecondaryDrawerItem().withName("Promotions")
+                )
+                .build();
+
 
     }
     private void checkDate()
