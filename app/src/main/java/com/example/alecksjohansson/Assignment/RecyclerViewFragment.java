@@ -22,7 +22,7 @@ import com.github.florent37.materialviewpager.header.MaterialViewPagerHeaderDeco
 public class RecyclerViewFragment extends Fragment {
 
     static final boolean GRID_LAYOUT = false;
-    private static final int ITEM_COUNT = 4;
+    private static final int ITEM_COUNT = 2;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private List<Object> mContentItems = new ArrayList<>();

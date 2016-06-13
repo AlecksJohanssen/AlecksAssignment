@@ -37,8 +37,8 @@ public class SearchResultsListAdapter extends RecyclerView.Adapter<SearchResults
 
         public ViewHolder(View view) {
             super(view);
-            mColorName = (TextView) view.findViewById(R.id.color_name);
-            mColorValue = (TextView) view.findViewById(R.id.color_value);
+            mColorName = (TextView) view.findViewById(R.id.place_name);
+            mColorValue = (TextView) view.findViewById(R.id.place_value);
             mTextContainer = view.findViewById(R.id.text_container);
         }
     }

@@ -14,17 +14,17 @@
         android:padding="16dp">
 
         <TextView
-            android:id="@+id/color_name"
+            android:id="@+id/place_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textSize="18sp"
-            tools:text="color name" />
+            tools:text="Place Name" />
 
         <TextView
-            android:id="@+id/color_value"
+            android:id="@+id/place_value"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="#000000" />
+            tools:text="#FFF" />
     </LinearLayout>
 </android.support.v7.widget.CardView>
