@@ -109,25 +109,14 @@ public class BookingFragment extends Fragment implements DatePickerDialog.OnDate
                 mSearchView.clearSuggestions();
             } else {
 
-                //this shows the top left circular progress
-                //you can call it where ever you want, but
-                //it makes sense to do it when loading something in
-                //the background.
                 mSearchView.showProgress();
-
-                //simulates a query call to a data source
-                //with a new query.
                 DatabaseHelper.findSuggestions(getActivity(), newQuery, 5, FIND_SUGGESTION_SIMULATED_DELAY, new DatabaseHelper.OnFindSuggestionsListener() {
 
                     @Override
                     public void onResults(List<DataSuggestion> results) {
 
-                        //this will swap the data and
-                        //render the collapse/expand animations as necessary
                         mSearchView.swapSuggestions(results);
 
-                        //let the users know that the background
-                        //process has completed
                         mSearchView.hideProgress();
                     }
                 });
@@ -151,7 +140,7 @@ public class BookingFragment extends Fragment implements DatePickerDialog.OnDate
                             }
 
                         });
-                Log.d("tAG", "onSuggestionClicked()");
+                Log.d("TAG", "onSuggestionClicked()");
             }
 
             @Override

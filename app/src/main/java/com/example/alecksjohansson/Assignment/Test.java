@@ -8,9 +8,6 @@ import com.example.alecksjohansson.Assignment.R;
 
 import java.util.List;
 
-/**
- * Created by florentchampigny on 24/04/15.
- */
 public class Test extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     List<Object> contents;

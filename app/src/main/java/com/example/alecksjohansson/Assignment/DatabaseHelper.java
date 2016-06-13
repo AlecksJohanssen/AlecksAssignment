@@ -28,24 +28,11 @@ public class DatabaseHelper {
 
     private static List<DataSuggestion> sDataSuggestion =
             new ArrayList<>(Arrays.asList(
-                    new DataSuggestion("green"),
-                    new DataSuggestion("blue"),
-                    new DataSuggestion("pink"),
-                    new DataSuggestion("purple"),
-                    new DataSuggestion("brown"),
-                    new DataSuggestion("gray"),
-                    new DataSuggestion("Granny Smith Apple"),
-                    new DataSuggestion("Indigo"),
-                    new DataSuggestion("Periwinkle"),
-                    new DataSuggestion("Mahogany"),
-                    new DataSuggestion("Maize"),
-                    new DataSuggestion("Mahogany"),
-                    new DataSuggestion("Outer Space"),
-                    new DataSuggestion("Melon"),
-                    new DataSuggestion("Yellow"),
-                    new DataSuggestion("Orange"),
-                    new DataSuggestion("Red"),
-                    new DataSuggestion("Orchid")));
+                    new DataSuggestion("Singapore"),
+                    new DataSuggestion("Viet Nam"),
+                    new DataSuggestion("Thailand"),
+                    new DataSuggestion("United States"),
+                    new DataSuggestion("Malaysia")));
 
     public interface OnFindColorsListener {
         void onResults(List<DataWrapper> results);

@@ -17,21 +17,21 @@ public class DataWrapper implements Parcelable {
     @SerializedName("name")
     @Expose
     private String name;
-    @SerializedName("rgb")
+    @SerializedName("country")
     @Expose
-    private String rgb;
+    private String country;
 
     private DataWrapper(Parcel in) {
         hex = in.readString();
         name = in.readString();
-        rgb = in.readString();
+        country = in.readString();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(hex);
         dest.writeString(name);
-        dest.writeString(rgb);
+        dest.writeString(country);
     }
 
     @Override
@@ -81,7 +81,7 @@ public class DataWrapper implements Parcelable {
      * The rgb
      */
     public String getRgb() {
-        return rgb;
+        return country;
     }
 
     /**
@@ -90,7 +90,7 @@ public class DataWrapper implements Parcelable {
      * The rgb
      */
     public void setRgb(String rgb) {
-        this.rgb = rgb;
+        this.country = country;
     }
 
     public static final Creator<DataWrapper> CREATOR = new Creator<DataWrapper>() {

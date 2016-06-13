@@ -9,15 +9,15 @@ import com.example.alecksjohansson.Assignment.models.SearchSuggestion;
  */
 public class SearchData implements SearchSuggestion {
 
-    private String mColorName;
+    private String mPlaceName;
     private boolean mIsHistory = false;
 
     public SearchData(String suggestion) {
-        this.mColorName = suggestion.toLowerCase();
+        this.mPlaceName = suggestion.toLowerCase();
     }
 
     public SearchData(Parcel source) {
-        this.mColorName = source.readString();
+        this.mPlaceName = source.readString();
         this.mIsHistory = source.readInt() != 0;
     }
 
@@ -31,7 +31,7 @@ public class SearchData implements SearchSuggestion {
 
     @Override
     public String getBody() {
-        return mColorName;
+        return mPlaceName;
     }
 
     public static final Creator<DataSuggestion> CREATOR = new Creator<DataSuggestion>() {
@@ -53,7 +53,7 @@ public class SearchData implements SearchSuggestion {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(mColorName);
+        dest.writeString(mPlaceName);
         dest.writeInt(mIsHistory ? 1 : 0);
     }
 }
