@@ -106,7 +106,7 @@ public class BookingFragment extends Fragment implements DatePickerDialog.OnDate
                 now.get(Calendar.MONTH),
                 now.get(Calendar.DAY_OF_MONTH)
         );
-        dpd.setThemeDark(false);
+        dpd.setThemeDark(true);
         dpd.setAccentColor(R.color.purple);
         dpd.show(getActivity().getFragmentManager(), "Datepickerdialog");
         dpd.setStartTitle("From");
@@ -129,27 +129,27 @@ public class BookingFragment extends Fragment implements DatePickerDialog.OnDate
     private void setUpFloatingSearch()
     {
         mSearchView.setOnQueryChangeListener(new FloatingSearchView.OnQueryChangeListener() {
-        @Override
-        public void onSearchTextChanged(String oldQuery, final String newQuery) {
-            if (!oldQuery.equals("") && newQuery.equals("")) {
-                mSearchView.clearSuggestions();
-            } else {
+            @Override
+            public void onSearchTextChanged(String oldQuery, final String newQuery) {
+                if (!oldQuery.equals("") && newQuery.equals("")) {
+                    mSearchView.clearSuggestions();
+                } else {
 
-                mSearchView.showProgress();
-                DatabaseHelper.findSuggestions(getActivity(), newQuery, 5, FIND_SUGGESTION_SIMULATED_DELAY, new DatabaseHelper.OnFindSuggestionsListener() {
+                    mSearchView.showProgress();
+                    DatabaseHelper.findSuggestions(getActivity(), newQuery, 5, FIND_SUGGESTION_SIMULATED_DELAY, new DatabaseHelper.OnFindSuggestionsListener() {
 
-                    @Override
-                    public void onResults(List<DataSuggestion> results) {
+                        @Override
+                        public void onResults(List<DataSuggestion> results) {
 
-                        mSearchView.swapSuggestions(results);
+                            mSearchView.swapSuggestions(results);
 
-                        mSearchView.hideProgress();
-                    }
-                });
+                            mSearchView.hideProgress();
+                        }
+                    });
+                }
+                Log.d("BookingFragment", "onSearchTextChanged()");
             }
-            Log.d("BookingFragment", "onSearchTextChanged()");
-        }
-    });
+        });
 
         mSearchView.setOnSearchListener(new FloatingSearchView.OnSearchListener() {
             @Override
@@ -233,19 +233,19 @@ public class BookingFragment extends Fragment implements DatePickerDialog.OnDate
             }
         });
     }
-private void setDateOnClickListener()
-{
-    mtvFlyOut.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        setDate(v);
+    private void setDateOnClickListener()
+    {
+        mtvFlyOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setDate(v);
+            }
+        });
+        mTvFlyBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setDate(v);
+            }
+        });
     }
-});
-    mTvFlyBack.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            setDate(v);
-        }
-    });
-}
 }

@@ -22,7 +22,7 @@ import java.util.List;
 
 public class DatabaseHelper {
 
-    private static final String COLORS_FILE_NAME = "colors.json";
+    private static final String COLORS_FILE_NAME = "places.json";
 
     private static List<DataWrapper> sDataWrapper = new ArrayList<>();
 
