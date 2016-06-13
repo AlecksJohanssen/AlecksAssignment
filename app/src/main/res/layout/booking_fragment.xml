@@ -28,7 +28,7 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:paddingTop="5dp"
-                android:text="Fly Out"
+                android:text="Check In"
                 android:background="@drawable/shape_below"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
@@ -52,7 +52,7 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:paddingTop="5dp"
-                android:text="Fly Back"
+                android:text="Check Out"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -79,7 +79,6 @@
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
                     android:paddingTop="5dp"
-                    android:text="Fly Out"
                     android:textColor="#4099EF"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -102,7 +101,6 @@
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
                     android:paddingTop="5dp"
-                    android:text="Fly Back"
                     android:textColor="#4099EF"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -156,9 +154,9 @@
         <com.arlib.floatingsearchview.FloatingSearchView
             android:id="@+id/floating_search_view"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="207dp"
             android:layout_marginTop="215dp"
-            app:floatingSearch_searchHint="Search..."
+            app:floatingSearch_searchHint="Choose Destination"
             app:floatingSearch_suggestionsListAnimDuration="250"
             app:floatingSearch_showSearchKey="false"
             app:floatingSearch_leftActionMode="showSearch"
@@ -173,7 +171,8 @@
         android:paddingLeft="4dp"
         android:paddingTop="60dp"
         android:clipToPadding="false"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        />
 
 
 </RelativeLayout>
