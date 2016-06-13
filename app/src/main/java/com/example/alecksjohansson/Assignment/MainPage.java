@@ -84,9 +84,6 @@ public class MainPage extends ActionBarActivity  {
                                 R.color.blue,
                                 getResources().getDrawable(R.drawable.wallpaper1));
                 }
-
-                //execute others actions if needed (ex : modify your header logo)
-
                 return null;
             }
         });

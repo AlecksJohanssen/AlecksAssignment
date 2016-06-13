@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -44,6 +45,7 @@ public class BookingFragment extends Fragment implements DatePickerDialog.OnDate
     private SearchResultsListAdapter mSearchResultsAdapter;
     private boolean mIsDarkSearchTheme = false;
 
+
     public static final long FIND_SUGGESTION_SIMULATED_DELAY = 250;
 
     private FloatingSearchView mSearchView;
@@ -60,10 +62,9 @@ public class BookingFragment extends Fragment implements DatePickerDialog.OnDate
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setDate();
         setUpFloatingSearch();
+        setDateOnClickListener();
     }
-
     private void updateFly(String dateStart, String dateEnd)
     {
         mTvFlyBack.setText(dateEnd);
@@ -72,7 +73,7 @@ public class BookingFragment extends Fragment implements DatePickerDialog.OnDate
     public static BookingFragment newInstance() {
         return new BookingFragment();
     }
-    public void setDate()
+    public void setDate(View v)
     {
         Calendar now = Calendar.getInstance();
         dpd = DatePickerDialog.newInstance(
@@ -102,7 +103,8 @@ public class BookingFragment extends Fragment implements DatePickerDialog.OnDate
         }
     }
     private void setUpFloatingSearch()
-    {mSearchView.setOnQueryChangeListener(new FloatingSearchView.OnQueryChangeListener() {
+    {
+        mSearchView.setOnQueryChangeListener(new FloatingSearchView.OnQueryChangeListener() {
         @Override
         public void onSearchTextChanged(String oldQuery, final String newQuery) {
             if (!oldQuery.equals("") && newQuery.equals("")) {
@@ -121,7 +123,6 @@ public class BookingFragment extends Fragment implements DatePickerDialog.OnDate
                     }
                 });
             }
-
             Log.d("BookingFragment", "onSearchTextChanged()");
         }
     });
@@ -208,5 +209,19 @@ public class BookingFragment extends Fragment implements DatePickerDialog.OnDate
             }
         });
     }
-
+private void setDateOnClickListener()
+{
+    mtvFlyOut.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        setDate(v);
+    }
+});
+    mTvFlyBack.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            setDate(v);
+        }
+    });
+}
 }
